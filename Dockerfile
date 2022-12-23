@@ -1,6 +1,8 @@
 FROM ubuntu
 
 LABEL MAINTAINER="Richard Holzeis <richard@holzeis.me>"
+LABEL org.opencontainers.image.authors="richard@holzeis.me"
+LABEL org.opencontainers.image.source="https://github.com/holzeis/signet"
 
 ARG VERSION=22.0
 
