@@ -1,7 +1,6 @@
 version: '3.7'
 services:
 
-  # Signet 
   bitcoin:
     image: ghcr.io/holzeis/bitcoind:signet
     container_name: bitcoin
@@ -14,6 +13,18 @@ services:
       - 48333:48333
     volumes:
       - ./data/:/data
+    restart: unless-stopped
+
+  faucet:
+    image: nginx
+    container_name: faucet
+    ports:
+      - 8080:80
+    volumes:
+      - ./index.html:/usr/share/nginx/html/faucet/index.html
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - bitcoin
     restart: unless-stopped
 
   electrs:
@@ -47,7 +58,6 @@ services:
       - ./data/:/data
     restart: unless-stopped
 
-  # Block explorer frontend
   esplora:
     image: ghcr.io/vulpemventures/esplora:latest
     container_name: esplora
