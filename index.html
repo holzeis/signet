@@ -17,7 +17,7 @@
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 var data = JSON.parse(xhr.responseText);
                 if (xhr.status === 200) {
-                  document.getElementById("message").innerHTML = "<div style='color:#008000'>Successfully sent <b>" + amount + "</b> to <b>" + address + "</b></div> <a href='http://localhost:5000/tx/" + data.result +"'>" + data.result + "</a>"; 
+                  document.getElementById("message").innerHTML = "<div style='color:#008000'>Successfully sent <b>" + amount + "</b> to <b>" + address + "</b></div> <a target='_blank' href='/tx/" + data.result +"'>" + data.result + "</a>"; 
                   getBalance();
                 } else {
                   document.getElementById("message").innerHTML = "<div style='color:#ff0000'>" + data.error.message + "</div>";
@@ -30,7 +30,7 @@
             document.getElementById("message").innerHTML = "<div style='color:#ff0000'>Failed to send! " + error + "</div>";
           }
           
-          xhr.open('post', 'http://127.0.0.1:8080', true);
+          xhr.open('post', '/bitcoin', true);
           const blob = new Blob(['{"jsonrpc": "1.0", "method": "sendtoaddress", "params": ["' + address +'", "'+ amount +'"]}'], { type: "text/plain" });
           xhr.setRequestHeader('Content-Type', 'text/plain');
           xhr.send(blob);
@@ -45,7 +45,7 @@
               document.getElementById("balance").innerText = data.result;
           }
         }
-        xhr.open('post', 'http://127.0.0.1:8080', true);
+        xhr.open('post', '/bitcoin', true);
         const blob = new Blob(['{"jsonrpc": "1.0", "method": "getbalance"}'], { type: "text/plain" });
         xhr.setRequestHeader('Content-Type', 'text/plain');
         xhr.send(blob);
