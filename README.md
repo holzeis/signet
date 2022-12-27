@@ -10,7 +10,7 @@ A custom setup to bootstrap a signet bitcoin service with electrs, esplora and a
     ```
 1. Run docker compose
     ```bash
-    docker-compose up
+    docker-compose up --build
     ```
 
 This will start up a pre-configured and pre-mined custom signet bitcoind service, an electrum server (electrs) and a blockchain explorer (esplorer).
